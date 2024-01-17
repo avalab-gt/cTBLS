@@ -1,6 +1,8 @@
 # cTBLS_demo
 Demo of the cTBLS system
 
+![](Demo_v1.mov)
+
 ### 1. Download the model and data files:
 
 ```fine-tuned-encoder.pt``` from https://huggingface.co/avalab/cTBLS_encoder  
