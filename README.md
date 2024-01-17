@@ -1,7 +1,7 @@
 # cTBLS_demo
 Demo of the cTBLS system
 
-### 1. Download the model and data files (scp from server):  
+### 1. Download the model and data files:
 
 ```fine-tuned-encoder.pt``` from https://huggingface.co/avalab/cTBLS_encoder  
 ```fine-tuned-qa_retriever_distributed_epoch_13_Jan_10_cpu.pt``` from https://huggingface.co/avalab/cTBLS_knowledge_retriever  
