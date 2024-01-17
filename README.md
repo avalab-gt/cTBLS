@@ -1,7 +1,7 @@
 # cTBLS_demo
 Demo of the cTBLS system
 
-![](Demo_v1.mov)
+https://github.com/avalab-gt/cTBLS/blob/main/Demo_v1.mov
 
 ### 1. Download the model and data files:
 
