@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Chatbot</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+    <div id="chatbox">
+        <div id="messages"></div>
+    </div>
+    <form id="input-form" autocomplete="off">
+        <input id="user-input" type="text" name="message" placeholder="Type your message here...">
+        <button type="submit">Send</button>
+    </form>
+    <script>
+        let counter = 0;
+
+        $("#input-form").on("submit", function (event) {
+            event.preventDefault();
+
+            let userMessage = $("#user-input").val();
+            $("#messages").append(`<div>User: ${userMessage}</div>`);
+
+            if (counter % 2 === 0) {
+                $.post("/process_message", {message: userMessage}, function(response) {
+                    $("#messages").append(`<div>Bot: ${response.message}</div>`);
+                });
+            } else {
+                $.post("/api_call", {message: userMessage}, function(response) {
+                    $("#messages").append(`<div>Bot: ${response.message}</div>`);
+                });
+            }
+
+            counter++;
+            $("#user-input").val("");
+        });
+    </script>
+</body>
+</html>

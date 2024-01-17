@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cTBLS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>cTBLS</h1>
+    <div class="chat">
+        <div class="messages" id="messages"></div>
+        <form id="input-form" autocomplete="off">
+            <input id="user-input" type="text" name="message" placeholder="Type your message here...">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+        <!--
+    <div>
+        <img src="{{ url_for('static', filename='Faroe_Islands.png') }}" alt="My Image">
+    </div>
+    -->
+    <script>
+        let counter = 0;
+
+        $("#input-form").on("submit", function (event) {
+            event.preventDefault();
+
+            let userMessage = $("#user-input").val();
+            $("#messages").append(`<div class="mine messages"><div class="message last">${userMessage}</div></div>`);
+
+            //if (counter % 2 === 0) {
+            if (counter == 0) {
+                $.post("/process_message", {message: userMessage}, function(response) {
+                    $("#messages").append(`<div class="yours messages"><div class="message last">${response.message}</div></div>`);
+                    
+
+                function display_image(src, width, height, alt) {
+                    var a = document.createElement("img");
+                    a.src = src;
+                    a.width = width;
+                    a.height = height;
+                    a.alt = alt;
+                    document.body.appendChild(a);
+                }
+                display_image('./static/Faroe_Islands.png', 
+                                479, 
+                                350, 
+                                'JavaScriptImage');
+                                });
+            } else {
+                $.post("/api_call", {message: userMessage}, function(response) {
+                    $("#messages").append(`<div class="yours messages"><div class="message last">${response.message}</div></div>`);
+                });
+            }
+
+            counter++;
+            $("#user-input").val("");
+            $("#messages").scrollTop($("#messages")[0].scrollHeight);
+        });
+    </script>
+</body>
+</html>
+
